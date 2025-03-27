@@ -14,16 +14,22 @@
 in {
   wayland.windowManager.hyprland = {
     settings = {
+      workspace = [
+        "name:1, monitor:DP-1"
+        "name:2, monitor:DP-2"
+      ];
       exec-once = [
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --uconfigurationser import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "killall -q swww;sleep .5 && swww init"
         "killall -q waybar;sleep .5 && waybar"
         "killall -q swaync;sleep .5 && swaync"
         "nm-applet --indicator"
         "lxqt-policykit-agent"
         "pypr &"
-        "sleep 1.5 && swww img /home/${username}/Pictures/Wallpapers/zaney-wallpaper.jpg"
+        "sleep 1.5 && swww img /home/${username}/zaneyos/wallpapers/zaney-wallpaper.jpg --output DP-1"
+        "sleep 1.5 && swww img /home/${username}/zaneyos/wallpapers/beautifulmountainscape.jpg  --output DP-2"
+        "hyprctl dispatch workspace 1"
       ];
 
       input = {
@@ -104,7 +110,7 @@ in {
 
       bind = [
         "$modifier,Return,exec,${terminal}"
-        "$modifier SHIFT,Return,exec,rofi-launcher"
+        "$modifier,SPACE,exec,rofi-launcher"
         "$modifier SHIFT,W,exec,web-search"
         "$modifier ALT,W,exec,wallsetter"
         "$modifier SHIFT,N,exec,swaync-client -rs"
@@ -152,7 +158,7 @@ in {
         "$modifier,9,workspace,9"
         "$modifier,0,workspace,10"
         "$modifier SHIFT,SPACE,movetoworkspace,special"
-        "$modifier,SPACE,togglespecialworkspace"
+        #"$modifier,SPACE,togglespecialworkspace"
         "$modifier SHIFT,1,movetoworkspace,1"
         "$modifier SHIFT,2,movetoworkspace,2"
         "$modifier SHIFT,3,movetoworkspace,3"
@@ -266,9 +272,12 @@ in {
       ];
     };
 
-    extraConfig = "
-      monitor=,preferred,auto,auto
-      ${extraMonitorSettings}
-    ";
+    extraConfig =
+      "
+      monitor=DP-1, preferred, 0x0, 1
+      monitor=DP-2, preferred, -1440x-600, 1, transform, 3
+      monitor=HDMI-A-1, preferred, 2540x0 , 1"
+      # ${extraMonitorSettings}
+      ;
   };
 }

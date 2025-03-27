@@ -1,9 +1,4 @@
-{
-  inputs,
-  ...
-}:
-
-{
+{inputs, ...}: {
   imports = [
     ./boot.nix
     ./fonts.nix
@@ -13,7 +8,7 @@
     ./packages.nix
     ./services.nix
     ./starfish.nix
-    ./steam.nix
+    # ./steam.nix
     ./stylix.nix
     ./system.nix
     ./user.nix

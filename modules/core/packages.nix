@@ -69,5 +69,24 @@
     virt-viewer
     wget
     ytmdl
+    jetbrains-toolbox
+    ollama-cuda
+    nvidia-system-monitor-qt
+    efibootmgr
+    floorp
+    lutris
+    prismlauncher
+    spotify
+    (texlive.combine {
+      inherit (texlive) scheme-full adjustbox;
+    })
+    python3
+    python3Packages.pygments
+    dotnetCorePackages.sdk_8_0_3xx
+    thunderbird
+    liquidctl
+    vesktop
+    teams-for-linux
+    flatpak
   ];
 }
